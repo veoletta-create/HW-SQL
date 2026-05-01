@@ -1,10 +1,36 @@
 package ru.netology.data;
 
+import com.github.javafaker.Faker;
 import lombok.Value;
 
 public class DataHelper {
+    private static final Faker FAKER = new Faker();
 
     private DataHelper() {
+    }
+
+    public static String generateRandomLogin() {
+        return FAKER.name().username();
+    }
+
+    public static String generateRandomPassword() {
+        return FAKER.internet().password();
+    }
+
+    public static AuthInfo generateRandomUser() {
+        return new AuthInfo(generateRandomLogin(), generateRandomPassword());
+    }
+
+    public static AuthInfo getAuthInfo() {
+        return new AuthInfo("vasya", "qwerty123");
+    }
+
+    public static AuthInfo getAuthInfoBadPassword() {
+        return new AuthInfo("vasya", generateRandomPassword());
+    }
+
+    public static VerificationCode generateRandomVerificationCode() {
+        return new VerificationCode(FAKER.numerify("######"));
     }
 
     @Value
@@ -13,15 +39,8 @@ public class DataHelper {
         String password;
     }
 
-    public static AuthInfo getFirstUser() {
-        return new AuthInfo("vasya", "qwerty123");
-    }
-
-    public static AuthInfo getSecondUser() {
-        return new AuthInfo("petya", "123qwerty");
-    }
-
-    public static AuthInfo getInvalidUser() {
-        return new AuthInfo("vasya", "wrongPassword");
+    @Value
+    public static class VerificationCode {
+        String code;
     }
 }

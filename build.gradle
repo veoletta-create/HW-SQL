@@ -13,6 +13,7 @@ compileTestJava.options.encoding = 'UTF-8'
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -20,6 +21,7 @@ dependencies {
     testImplementation 'com.codeborne:selenide:6.19.1'
     testImplementation 'commons-dbutils:commons-dbutils:1.8.1'
     testImplementation 'mysql:mysql-connector-java:8.0.33'
+    testImplementation 'com.github.javafaker:javafaker:1.0.2'
     testCompileOnly 'org.projectlombok:lombok:1.18.30'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
 }
