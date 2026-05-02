@@ -1,12 +1,17 @@
 services:
   mysqldb:
-    image: mysql:latest
+    image: mysql:8.0
+    container_name: hw-sql-mysqldb-1
     ports:
       - '3306:3306'
     volumes:
-      - ./src/test/resources:/docker-entrypoint-initdb.d
+      - ./initdb:/docker-entrypoint-initdb.d
+      - mysql_data:/var/lib/mysql
     environment:
-      - MYSQL_RANDOM_ROOT_PASSWORD=yes
-      - MYSQL_DATABASE=app
-      - MYSQL_USER=app
-      - MYSQL_PASSWORD=pass
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: app
+      MYSQL_USER: app
+      MYSQL_PASSWORD: pass
+
+volumes:
+  mysql_data:
